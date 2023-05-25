@@ -80,7 +80,7 @@ appender name="file" class="org.apache.log4j.RollingFileAppender">
 
 ## Log.txt
 
-![Log.txt](img.jpg)
+![Log.txt](img/img.jpg)
 
 
 
