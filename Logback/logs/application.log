@@ -1,0 +1,8 @@
+13:59:29.385 [main] INFO  com.Logback.example.Main - Starting debugging
+13:59:29.388 [main] DEBUG com.Logback.example.Main - Ending debugging
+14:06:45.075 [main] WARN  com.Logback.example.Logs.Log - Warn Message
+14:06:45.079 [main] ERROR com.Logback.example.Logs.Log - Err Message
+14:06:45.079 [main] DEBUG com.Logback.example.Logs.Log - Debug Message
+14:06:45.079 [main] INFO  com.Logback.example.Logs.Log - Info Message
+
+

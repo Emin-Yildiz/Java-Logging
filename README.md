@@ -1,4 +1,4 @@
-# Log4j
+# Java Logging
 
 ## Loglama nedir?
 
@@ -17,8 +17,10 @@
 -Log4j, loglamayı seviye bazlı yapar bu seviye properties dosyasından ayarlanabilir. Seviye ne kadar düşükse, o kadar az log alır ve sistem kaynaklarını az kullanır.
 -İstenilen formatta log kayıtları tutulabilir.(.txt, veritabanı, xml, html gibi).
 
-### Yapılandırma Dosyası
-Aşağıdaki yapılandırma dosyasına göre 
+### Log4j Yapılandırma Dosyası
+
+Aşağıdaki yapılandırma dosyasına göre
+
 - **log4j.rootLogger**, özelliği ile log düzeyi belirlenir.
 - Çıktı, **./log/log.txt** dosyasına yazdırılır.
 - Dosya boyutunu 10 MB'yı geçtiğinde 5 yedek dosya oluşturulur.
@@ -26,7 +28,7 @@ Aşağıdaki yapılandırma dosyasına göre
 
 #### log4j.properties
 
-```code
+```properties
 # Log düzeylerini belirleyin: TRACE, DEBUG, INFO, WARN, ERROR, FATAL
 # Root logger option
 log4j.rootLogger=INFO,HTML, stdout, file
@@ -52,9 +54,10 @@ log4j.appender.HTML.layout.Title=Application logs
 log4j.appender.HTML.layout.LocationInfo=true
 log4j.appender.HTML.Threshold=DEBUG
 ```
+
 #### log4j.xml
 
-```code
+```xml
 <appender name="console" class="org.apache.log4j.ConsoleAppender">
     <layout class="org.apache.log4j.PatternLayout">
         <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
@@ -80,19 +83,51 @@ appender name="file" class="org.apache.log4j.RollingFileAppender">
 
 ## Log.txt
 
-![Log.txt](img.jpg)
+![Log.txt](img/img.jpg)
 
+## Logback nedir?
 
+- Log4j, loglama ihtiyaçlarını karşılamada başarılı olsa da, performans ve yapılandırma açısından bazı sınırlamaları vardı. Logback, bu sınırlamaları aşmak ve daha gelişmiş özellikler sunmak amacıyla tasarlanmıştır.
 
+- Logback, üç ana bileşenden oluşur: Logger, Appender ve Layout.
 
+1. Logger, log verilerini oluşturmak ve yönlendirmek için kullanılır.
+2. Appender, log verilerini çeşitli hedeflere (dosya, konsol, uzak sunucu vb.) yazmak için kullanılır.
+3. Layout, log verilerinin nasıl biçimlendirileceğini belirler.
 
+### Logback Yapılandırma Dosyası
 
+- Bu yapılandırma dosyası, log verilerini konsol üzerinde görüntülerken aynı zamanda logs/application.log adlı bir dosyaya da yazacaktır.
 
+- Yapılandırmada CONSOLE ve FILE adında iki appender tanımlanmıştır. Her ikisinin de formatı aynıdır ve %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n deseni kullanılmıştır.
 
+    ```xml
+    <configuration>
 
+      <!-- Konsol üzerinde log çıktısını gösterir -->
+      <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+          <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+      </appender>
 
+      <!-- Dosyaya log çıktısını yazmak için -->
+      <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/application.log</file>
+        <encoder>
+          <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+      </appender>
 
+      <!-- Root logger -->
+      <root level="debug">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+      </root>
 
+    </configuration>
+    ```
 
+## application.log
 
-
+![application.log](img/img-1.jpg)
