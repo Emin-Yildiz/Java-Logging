@@ -84,6 +84,10 @@ appender name="file" class="org.apache.log4j.RollingFileAppender">
 ## Log.txt
 
 ![Log.txt](img/img.jpg)
+<<<<<<< HEAD
+=======
+
+>>>>>>> d508a03d2dd4e6178c852899c79c6d233174a17a
 
 ## Logback nedir?
 
